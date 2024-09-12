@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tube - 8-bit Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #0f0;
+            text-shadow: 2px 2px #00f;
+        }
+
+        .navbar {
+            background-color: #00f;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background-color: #0f0;
+            animation: pixelate 2s linear infinite;
+        }
+
+        @keyframes pixelate {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .navbar a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #0f0;
+            animation: pixelateHover 0.5s steps(5) infinite;
+        }
+
+        @keyframes pixelateHover {
+            0% { clip-path: inset(0 75% 0 0); }
+            25% { clip-path: inset(0 50% 0 25%); }
+            50% { clip-path: inset(0 25% 0 50%); }
+            75% { clip-path: inset(0 0 0 75%); }
+            100% { clip-path: inset(0 0 0 100%); }
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px 0;
+            color: #0f0;
+            text-shadow: 2px 2px #00f;
+            animation: blink 1s steps(2) infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .study-form {
+            background-color: #00f;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 4px solid #0f0;
+        }
+
+        .study-form input, .study-form button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .study-sessions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .study-session {
+            background-color: #00f;
+            padding: 10px;
+            border: 4px solid #0f0;
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .study-session:hover {
+            transform: scale(1.05);
+        }
+
+        .study-session img {
+            width: 100%;
+            height: auto;
+            image-rendering: pixelated;
+        }
+
+        .progress-bar {
+            background-color: #00f;
+            height: 20px;
+            margin-top: 20px;
+            border: 4px solid #0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress {
+            background-color: #0f0;
+            height: 100%;
+            width: 0;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.1) 10px,
+                rgba(0,0,0,0.1) 20px
+            );
+            animation: moveStripes 1s linear infinite;
+        }
+
+        @keyframes moveStripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 0; }
+        }
+
+        .notification, .achievement {
+            background-color: #f00;
+            color: #fff;
+            padding: 10px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            font-size: 12px;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #f00, 0 0 0 4px #fff;
+        }
+
+        .achievement {
+            background-color: #0f0;
+            color: #000;
+            box-shadow: 0 0 0 2px #0f0, 0 0 0 4px #fff;
+            animation: pulse 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .edit-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .edit-buttons button {
+            background-color: #0f0;
+            color: #000;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+        }
+
+        .edit-buttons button:hover {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(0); }
+            75% { transform: translateX(2px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#login">Login</a>
+        <a href="#about">About</a>
+    </div>
+
+    <div class="container">
+        <h1>Study Tube</h1>
+        <h2>8-bit Edition</h2>
+
+        <div class="welcome-message">Welcome buddy! See your videos without distraction</div>
+
+        <div class="study-form">
+            <input type="text" id="channelName" placeholder="Channel Name">
+            <input type="text" id="studyLink" placeholder="YouTube Video Link">
+            <input type="datetime-local" id="studyTime">
+            <button onclick="addStudySession()">Add Study Session</button>
+        </div>
+
+        <div class="study-sessions" id="studySessions"></div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+        </div>
+
+        <div class="notification" id="notification"></div>
+        <div class="achievement" id="achievement"></div>
+    </div>
+
+    <script>
+        let studySessions = JSON.parse(localStorage.getItem('studySessions')) || [];
+
+        function addStudySession() {
+            const channelName = document.getElementById('channelName').value;
+            const studyLink = document.getElementById('studyLink').value;
+            const studyTime = document.getElementById('studyTime').value;
+
+            if (channelName && studyLink && studyTime) {
+                const newSession = {
+                    id: Date.now(),
+                    channelName,
+                    studyLink,
+                    studyTime,
+                    completed: false
+                };
+
+                studySessions.push(newSession);
+                updateLocalStorage();
+                renderStudySessions();
+                updateProgressBar();
+            }
+        }
+
+        function getYouTubeVideoId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        function renderStudySessions() {
+            const container = document.getElementById('studySessions');
+            container.innerHTML = '';
+
+            studySessions.forEach(session => {
+                const videoId = getYouTubeVideoId(session.studyLink);
+                const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/0.jpg` : '/api/placeholder/150/100';
+
+                const sessionElement = document.createElement('div');
+                sessionElement.className = 'study-session';
+                sessionElement.innerHTML = `
+                    <h3>${session.channelName}</h3>
+                    <img src="${thumbnailUrl}" alt="Video Thumbnail">
+                    <p>Time: ${new Date(session.studyTime).toLocaleString()}</p>
+                    <a href="${session.studyLink}" target="_blank">Join</a>
+                    <div class="edit-buttons">
+                        <button onclick="editSession(${session.id})">Edit</button>
+                        <button onclick="deleteSession(${session.id})">Delete</button>
+                    </div>
+                    <input type="checkbox" ${session.completed ? 'checked' : ''} onchange="toggleComplete(${session.id})">
+                    Done
+                `;
+                container.appendChild(sessionElement);
+            });
+        }
+
+        function editSession(id) {
+            const session = studySessions.find(s => s.id === id);
+            if (session) {
+                document.getElementById('channelName').value = session.channelName;
+                document.getElementById('studyLink').value = session.studyLink;
+                document.getElementById('studyTime').value = session.studyTime;
+                deleteSession(id);
+            }
+        }
+
+        function deleteSession(id) {
+            studySessions = studySessions.filter(session => session.id !== id);
+            updateLocalStorage();
+            renderStudySessions();
+            updateProgressBar();
+        }
+
+        function toggleComplete(id) {
+            const session = studySessions.find(s => s.id === id);
+            if (session) {
+                session.completed = !session.completed;
+                updateLocalStorage();
+                updateProgressBar();
+                if (session.completed) {
+                    showAchievement(session);
+                }
+            }
+        }
+
+        function showAchievement(session) {
+            const achievementElement = document.getElementById('achievement');
+            achievementElement.textContent = `Level Up! You mastered "${session.channelName}" as planned!`;
+            achievementElement.style.display = 'block';
+            setTimeout(() => {
+                achievementElement.style.display = 'none';
+            }, 5000); // Hide after 5 seconds
+        }
+
+        function updateProgressBar() {
+            const total = studySessions.length;
+            const completed = studySessions.filter(s => s.completed).length;
+            const progress = total > 0 ? (completed / total) * 100 : 0;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function updateLocalStorage() {
+            localStorage.setItem('studySessions', JSON.stringify(studySessions));
+        }
+
+        function checkUpcomingSessions() {
+            const now = new Date();
+            const upcoming = studySessions.find(session => {
+                const sessionTime = new Date(session.studyTime);
+                const timeDiff = sessionTime - now;
+                return timeDiff > 0 && timeDiff <= 300000; // 5 minutes or less
+            });
+
+            if (upcoming) {
+                const notification = document.getElementById('notification');
+                notification.textContent = `Quest Alert: "${upcoming.channelName}" starts in ${Math.ceil((new Date(upcoming.studyTime) - now) / 60000)} mins!`;
+                notification.style.display = 'block';
+            }
+        }
+
+        renderStudySessions();
+        updateProgressBar();
+        setInterval(checkUpcomingSessions, 60000); // Check every minute
+    </script>
+</body>
+</html>
