@@ -39,7 +39,7 @@ To add images to the project:
 4. demo:
 
 ```html
-<a href="https://www.example.com">Click here</a>
+<a href="\https://66e34b0653881a2b7d03fed3--verdant-salmiakki-73a3ec.netlify.app/">Click here</a>
 
 
 
