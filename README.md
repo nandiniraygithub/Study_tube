@@ -1,6 +1,6 @@
 # Study Tube - 8-bit Edition
 
-![Study Tube Screenshot](<img src="study.png" alt="Description of the image">)
+![Study Tube Screenshot](<img src="https://github.com/nandiniraygithub/Study_tube/blob/main/Study_tube/study.png" alt="Description of the image">)
 
 
 [Live Demo](https://66e34b0653881a2b7d03fed3--verdant-salmiakki-73a3ec.netlify.app/)
