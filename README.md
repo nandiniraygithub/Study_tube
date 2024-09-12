@@ -34,24 +34,18 @@ To add images to the project:
 2. Add your images to this folder (e.g., `logo.png`, `background.jpg`)
 3. Update the HTML to reference these images:
 
-```html
-<img src="images/logo.png" alt="Study Tube Logo">
-```
 
-4. For thumbnails, use YouTube's image API:
+
+4. demo:
 
 ```html
-<img src="https://img.youtube.com/vi/VIDEO_ID/0.jpg" alt="Video Thumbnail">
-```
+<a href="https://www.example.com">Click here</a>
 
-Replace `VIDEO_ID` with the actual YouTube video ID.
+
 
 ## Customization
 
 Edit HTML, CSS, or JavaScript to add features or change the style.
 
-## License
-
-[MIT License](LICENSE)
 
 Happy studying! 🎮📚
